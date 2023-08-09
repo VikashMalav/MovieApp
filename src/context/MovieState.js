@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import MovieContext from './MovieContext'
 const MovieState = (props) => {
     const [movies,setMovies]=useState([])
-    const [user,setUser]=useState('')
+    const [user,setUser]=useState(null)
     const [isLoading,setIsLoading]=useState(true)
     const [userData,setUserData]=useState({})
     const [favorites,setFavorites]=useState([])

@@ -12,9 +12,9 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { setUser, user, setUserData } = useContext(MovieContext)
+  const { setUser, setUserData } = useContext(MovieContext)
 
-  console.log(user)
+  // console.log(user)
 
 
   const onLogin = (e) => {
@@ -24,6 +24,7 @@ const Login = () => {
       .then((userCredential) => {
 
         const user = userCredential.user;
+        sessionStorage.setItem("user",JSON.stringify(user))
         setUserData(user)
         navigate("/home")
 
@@ -50,6 +51,7 @@ const Login = () => {
         const token = credential.accessToken;
         setUser(token)
         const user = result.user;
+        sessionStorage.setItem("user",JSON.stringify(user))
         console.log(user)
         setUserData(user)
         navigate('/home')

@@ -8,7 +8,7 @@ import Favorites from './pages/Favorites'
 import SignOut from './pages/SignOut'
 import ProtectedRoute from './pages/ProtectedRoute'
 import MovieContext from './context/MovieContext'
-import Nav from './pages/Nav'
+import MovieDetailsPage from './pages/MovieDetailsPage'
 const App = () => {
   const { user } = useContext(MovieContext)
   return (
@@ -19,6 +19,7 @@ const App = () => {
           <Route path='/signup' element={<Signup />} />
 
           <Route path='/home' element={<ProtectedRoute><Movies /></ProtectedRoute>} />
+          <Route path='/home/:movieId' element={<ProtectedRoute><MovieDetailsPage /></ProtectedRoute>} />
           <Route path='/Watchlist' element={<ProtectedRoute><Watchlist /></ProtectedRoute>} />
           <Route path='/favorites' element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
           <Route path='/user' element={<ProtectedRoute><SignOut /></ProtectedRoute>} />

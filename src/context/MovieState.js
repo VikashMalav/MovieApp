@@ -6,8 +6,9 @@ const MovieState = (props) => {
     const [isLoading,setIsLoading]=useState(true)
     const [userData,setUserData]=useState({})
     const [favorites,setFavorites]=useState([])
+    const [watchlist,setWatchlist]=useState([])
   return (
-    <MovieContext.Provider value={{movies,setMovies,user,setUser,isLoading,setIsLoading,setUserData,userData,favorites,setFavorites}}>
+    <MovieContext.Provider value={{movies,setMovies,user,setUser,isLoading,setIsLoading,setUserData,userData,favorites,setFavorites,watchlist,setWatchlist}}>
      {props.children}
     </MovieContext.Provider>
   )

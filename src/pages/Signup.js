@@ -74,7 +74,7 @@ const Signup = () => {
       height: '100vh', 
     }}>
       <form>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" align='center'gutterBottom>
           SignUp
         </Typography>
         <Grid container spacing={2}>
@@ -120,7 +120,7 @@ const Signup = () => {
           Create an Account
         </Button>
         <Divider>OR</Divider>
-        <Button onClick={googleSignIn}>SignIn with Google</Button>
+        <Button onClick={googleSignIn} align='center'>SignIn with Google</Button>
       </form>
       <Typography mt={3} variant="body">
         already have an account ?<Link to="/"> login</Link>

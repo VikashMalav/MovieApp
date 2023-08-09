@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, List, ListItem, ListItemButton, Typography, Paper } from '@mui/material';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -7,13 +7,15 @@ import MovieContext from '../context/MovieContext';
 const SignOut = () => {
     const { setUser, userData } = useContext(MovieContext);
     const Navigate = useNavigate();
-
+   const userinfo  =JSON.parse(sessionStorage.getItem('user'))
+console.log(userinfo)
+   
     const handleSignOut = () => {
         const auth = getAuth();
         signOut(auth)
             .then(() => {
                 console.log('Sign-out successful.');
-                sessionStorage.removeItem('accessToken');
+                sessionStorage.removeItem('user');
                 setUser('');
                 Navigate('/');
             })
@@ -26,16 +28,16 @@ const SignOut = () => {
         <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
             <Paper elevation={3} sx={{ padding: '20px', borderRadius: '10px' }}>
                 <List>
-                    <ListItem disablePadding>
+                   {userData? <><ListItem disablePadding>
                         <ListItemButton>
-                            <Typography variant="body1">User: {userData?.displayName}</Typography>
+                            <Typography variant="body1">User: {userinfo.displayName || 'Not available'}</Typography>
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton>
-                            <Typography variant="body1">Email: {userData?.email}</Typography>
+                            <Typography variant="body1">Email: {userinfo.email}</Typography>
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem></>:''}
                     <ListItem disablePadding>
                         <ListItemButton onClick={handleSignOut}>
                             <Typography variant="body1">Logout</Typography>

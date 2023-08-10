@@ -8,16 +8,17 @@ const SignOut = () => {
     const { setUser, userData } = useContext(MovieContext);
     const Navigate = useNavigate();
    const userinfo  =JSON.parse(sessionStorage.getItem('user'))
-console.log(userinfo)
+//console(userinfo)
    
     const handleSignOut = () => {
-        const auth = getAuth();
+        const auth = getAuth()
         signOut(auth)
             .then(() => {
-                console.log('Sign-out successful.');
-                sessionStorage.removeItem('user');
-                setUser('');
-                Navigate('/');
+                //console('Sign-out successful.');
+                sessionStorage.removeItem('user')
+                sessionStorage.removeItem('UID')
+              
+                Navigate('/')
             })
             .catch((error) => {
                 console.log(error);

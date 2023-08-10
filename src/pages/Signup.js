@@ -13,7 +13,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const {user,setUser,setUserData}=useContext(MovieContext)
-  console.log(error)
+  //console(error)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -22,7 +22,7 @@ const Signup = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+        //console(user);
        
         navigate("/")
         // ...
@@ -47,19 +47,19 @@ const Signup = () => {
         const token = credential.accessToken;
         setUser(token)
         const user = result.user;
-        console.log(user)
+        //console(user)
         setUserData(user)
         navigate('/home')
        
       }).catch((error) => {
        
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        const errorCode = error.code
+        const errorMessage = error.message
        
-        const email = error.customData.email;
-        
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
+        const email = error.customData.email
+        setError(errorMessage)
+        const credential = GoogleAuthProvider.credentialFromError(error)
+        console.log(credential)
       });
 
 

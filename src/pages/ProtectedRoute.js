@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged ,signOut} from "firebase/auth";
 import React, { useContext, useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 import MovieContext from "../context/MovieContext";
@@ -12,14 +12,25 @@ const ProtectedRoute = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        setUser(uid);
+        sessionStorage.setItem('UID',uid)
+        setUser(uid)
       } else {
-        setUser(null);
+        signOut(auth)
+          .then(() => {
+            console.log('Sign-out successful.')
+            sessionStorage.removeItem('user')
+            sessionStorage.removeItem('UID')
+            setUser(null)
+            Navigate('/')
+          })
+          .catch((error) => {
+            console.log(error);
+          })
       }
     });
 
-    return () => unsubscribe();
-  }, [auth, setUser]);
+    return () => unsubscribe()
+  }, [auth, setUser])
 
   if (user !== null) {
     return (

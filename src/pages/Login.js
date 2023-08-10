@@ -17,28 +17,25 @@ const Login = () => {
   // console.log(user)
 
 
-  const onLogin = (e) => {
-
+  const onLogin = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-
-        const user = userCredential.user;
-        sessionStorage.setItem("user",JSON.stringify(user))
-        setUserData(user)
-        navigate("/home")
-
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage)
-        setError(errorCode)
-      });
-
-
-
-  }
+  
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      setUser(user.uid)
+      // console.log(user.uid)
+      sessionStorage.setItem("user", JSON.stringify(user));
+      setUserData(user);
+      navigate("/home");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      setError(errorCode);
+    }
+  };
+  
   const googleLoginIn = (e) => {
 
     const auth = getAuth();
@@ -52,7 +49,7 @@ const Login = () => {
         setUser(token)
         const user = result.user;
         sessionStorage.setItem("user",JSON.stringify(user))
-        console.log(user)
+        //console(user)
         setUserData(user)
         navigate('/home')
 

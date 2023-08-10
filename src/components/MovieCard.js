@@ -19,12 +19,12 @@ const MovieCard = ({ title, posterUrl, releaseYear, movieId }) => {
       const api_key = process.env.REACT_APP_API_KEY
       const url = `${process.env.REACT_APP_BASE_URL}3/movie/${id}?api_key=${api_key}&language=en-US`
       const response = await axios.get(url)
-      console.log(response.data)
+      //console.log(response.data)
       // setFavorites([...favorites, response.data])
       return [...list, response.data]
     }
     catch (err) {
-      console.log(err)
+      //console.log(err)
     }
   }
 
@@ -38,11 +38,11 @@ const MovieCard = ({ title, posterUrl, releaseYear, movieId }) => {
       setFavorites(movieById)
     }
     else if (isLiked === true && movieId) {
-      console.log("++++++++++++++chla")
+      //console.log("++++++++++++++chla")
       const fevList = (id) => {
         const temp = favorites.filter((movie) => { return movie.id !== movieId })
         setFavorites([...temp])
-        console.log(favorites)
+        //console.log(favorites)
       }
       fevList(movieId)
     }
@@ -57,14 +57,14 @@ const MovieCard = ({ title, posterUrl, releaseYear, movieId }) => {
     if (addedToWatchList !== true && movieId) {
       const movieById = await fevList(movieId, watchlist)
       setWatchlist(movieById)
-      console.log(watchlist)
+      //console.log(watchlist)
     }
     else if (addedToWatchList === true && movieId) {
-      console.log("++++++++++++++chla")
+      //console.log("++++++++++++++chla")
       const watchListRemove = (id) => {
         const temp = watchlist.filter((movie) => { return movie.id !== movieId })
         setWatchlist([...temp])
-        console.log(favorites)
+        //console.log(favorites)
       }
       watchListRemove(movieId)
     }

@@ -49,11 +49,11 @@ const SingleMoviePage = () => {
     return null;
   }
   const loadTrailer = async () => {
-    console.log("+++++++++++++++++++++++++++++++++yt----------")
+    //console("+++++++++++++++++++++++++++++++++yt----------")
     const trailerKey = await fetchTrailerKey()
     setTrailerKey(trailerKey)
   }
-  console.log(trailerKey)
+  //console(trailerKey)
   
 
   if (!movieDetails) {

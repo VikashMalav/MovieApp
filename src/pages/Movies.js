@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
-import MovieCard from '../components/MovieCard';
-import axios from 'axios';
-import MovieContext from '../context/MovieContext';
-import { Container, Box, CircularProgress, Grid, TextField, Button, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import MovieCard from '../components/MovieCard'
+import axios from 'axios'
+import MovieContext from '../context/MovieContext'
+import { Container, Box, CircularProgress, Grid, TextField, Button, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { useNavigate } from 'react-router-dom'
 
 const Movies = () => {
-  const { setMovies, movies, setIsLoading, isLoading } = useContext(MovieContext);
+  const { setMovies, movies, setIsLoading, isLoading } = useContext(MovieContext)
   const api_key = process.env.REACT_APP_API_KEY
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const theme = useTheme();
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const theme = useTheme()
   const navigate=useNavigate()
 
   useEffect(() => {
@@ -20,15 +20,15 @@ const Movies = () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/3/discover/movie?sort_by=popularity.desc&api_key=${api_key}`
-        );
-        setMovies(response.data.results);
-        setIsLoading(false);
+        )
+        setMovies(response.data.results)
+        setIsLoading(false)
       } catch (err) {
-        console.log(err);
+        //console(err);
       }
-    };
-    fetchMovies();
-  }, []);
+    }
+    fetchMovies()
+  }, [])
 
   const handleMovieClick = async (movieId) => {
 
@@ -37,11 +37,11 @@ const Movies = () => {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}3/movie/${movieId}?api_key=${api_key}`)
 
       const searchResults = response.data
-      console.log(searchResults)
+      //console(searchResults)
       navigate(`/home/${movieId}`)
 
     } catch (err) {
-      console.log(err);
+      //console(err);
     }
   }
 
@@ -56,7 +56,7 @@ const Movies = () => {
       const searchResults = response.data.results;
       setSearchResults(searchResults);
     } catch (err) {
-      console.log(err);
+      //console(err);
     }
   };
 
